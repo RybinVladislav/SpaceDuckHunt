@@ -107,6 +107,14 @@ public class Battlefield {
         aimPosition = position;
     }
 
+    public Array<Spaceship> getSpaceships() {
+        return spaceships;
+    }
+
+    public Array<Spaceship> getDestroyedSpaceships() {
+        return destroyedSpaceships;
+    }
+
     private void handleSpaceshipDestruction(Spaceship spaceship) {
         currentScore += spaceship.getDestructionScore();
         spaceships.removeValue(spaceship, true);
