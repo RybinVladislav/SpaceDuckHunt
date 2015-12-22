@@ -1,5 +1,6 @@
 package com.csf.duckhunt.duckHuntModel;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -16,6 +17,8 @@ public class Spaceship {
     private int currentHealth;
     private DestroyableObjectState currentState = DestroyableObjectState.Alive;
     private int destructionScore;
+    private float yOffset;
+    private float startPosition;
 
     public Spaceship(Vector2 startingPosition, Vector2 startingMoveDirection, float startingMoveSpeed,
                      int destructionScore, float width, float height) {
@@ -23,10 +26,11 @@ public class Spaceship {
         this.moveDirection = startingMoveDirection;
         this.destructionScore = destructionScore;
         this.moveSpeed = startingMoveSpeed;
-
         this.boundingBox = new Rectangle();
         this.boundingBox.setWidth(width);
         this.boundingBox.setHeight(height);
+        this.yOffset = 0;
+        this.startPosition = position.y;
     }
 
     public void takeDamage(int amount) {
@@ -62,7 +66,13 @@ public class Spaceship {
     }
 
     private void move() {
-        position = position.add(moveDirection.scl(moveSpeed));
+        position = position.set(position.x  +moveDirection.x * moveSpeed, position.y + moveDirection.y * moveSpeed);
+        yOffset = position.y - startPosition;
+        if (yOffset > 20) {
+            moveDirection.y = -1;
+        } else if (yOffset < -20) {
+            moveDirection.y = 1;
+        }
     }
 
     private void destroy() {

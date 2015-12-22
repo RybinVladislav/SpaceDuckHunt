@@ -61,12 +61,10 @@ public class MainScreen implements Screen {
         for (Spaceship spaceship: battlefield.spaceships) {
             shipSprite.setCenterX(spaceship.getPosition().x);
             shipSprite.setCenterY(spaceship.getPosition().y);
-            System.out.println(spaceship.getPosition().x);
             shipSprite.draw(batch);
         }
 
         batch.end();
-
         battlefield.setAimPosition(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
         battlefield.update();
     }
