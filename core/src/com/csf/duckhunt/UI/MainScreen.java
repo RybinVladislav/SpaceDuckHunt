@@ -3,6 +3,7 @@ package com.csf.duckhunt.UI;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -22,6 +23,7 @@ public class MainScreen implements Screen {
     private OrthographicCamera camera;
     private Texture ship;
     private Sprite shipSprite;
+    private Music backgroundMusic;
 
     private Battlefield battlefield = Battlefield.getInstance();
 
@@ -31,6 +33,9 @@ public class MainScreen implements Screen {
     }
 
     public void create() {
+        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("core/assets/music.mp3"));
+        this.backgroundMusic.setLooping(true);
+        this.backgroundMusic.play();
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, 853, 640);
         this.batch = new SpriteBatch();
