@@ -24,7 +24,6 @@ public class MainScreen implements Screen {
     private OrthographicCamera camera;
     private Texture ship;
     private Sprite shipSprite;
-    private Music backgroundMusic;
 
     private Battlefield battlefield = Battlefield.getInstance();
 
@@ -34,9 +33,6 @@ public class MainScreen implements Screen {
     }
 
     public void create() {
-        this.backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("core/assets/music.mp3"));
-        this.backgroundMusic.setLooping(true);
-        this.backgroundMusic.play();
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, 853, 640);
         this.batch = new SpriteBatch();
