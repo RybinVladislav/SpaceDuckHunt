@@ -57,12 +57,14 @@ public class MainScreen implements Screen {
         backSprite.draw(batch);
 
         for (Spaceship spaceship: battlefield.spaceships) {
-            shipSprite.setCenterX(spaceship.getBoundingBox().x);
-            shipSprite.setCenterY(spaceship.getBoundingBox().y);
+            shipSprite.setCenterX(spaceship.getPosition().x);
+            shipSprite.setCenterY(spaceship.getPosition().y);
+            System.out.println(spaceship.getPosition().x);
             shipSprite.draw(batch);
         }
 
         batch.end();
+        battlefield.update();
     }
 
     @Override
