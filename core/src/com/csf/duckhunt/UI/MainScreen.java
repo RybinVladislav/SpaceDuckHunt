@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.csf.duckhunt.duckHuntModel.Battlefield;
 import com.csf.duckhunt.duckHuntModel.Spaceship;
 
@@ -64,6 +65,8 @@ public class MainScreen implements Screen {
         }
 
         batch.end();
+
+        battlefield.setAimPosition(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
         battlefield.update();
     }
 
