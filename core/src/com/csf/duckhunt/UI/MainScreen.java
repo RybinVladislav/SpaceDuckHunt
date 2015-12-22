@@ -1,10 +1,15 @@
 package com.csf.duckhunt.UI;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 
 
 public class MainScreen implements Screen {
 
+
+    public MainScreen(Game game) {
+
+    }
 
     @Override
     public void show() {
