@@ -51,7 +51,7 @@ public class IntroScreen implements Screen {
             direction = -1;
         }
         else if (this.titleHeight < 275) {
-            direction =1;
+            direction = 1;
         }
         this.titleHeight += direction * (float)(25.0f * delta);
         titleSprite.setPosition(-25, this.titleHeight);

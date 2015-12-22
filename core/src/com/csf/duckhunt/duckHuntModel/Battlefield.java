@@ -25,6 +25,7 @@ public class Battlefield {
     private BattlefieldState currentState = BattlefieldState.stopped;
     private int currentScore = 0;
     private long lastSpaceshipCreationTime;
+    private Rectangle standartSpaceshipBoundingBox;
 
     private Battlefield() {
 
@@ -45,6 +46,7 @@ public class Battlefield {
             destroyedSpaceships = new Array<>();
             playersWeapon = new PlayersWeapon(new Vector2(width / 2, 0));
             currentState = BattlefieldState.active;
+            aimPosition = new Vector2(-1000, -1000);
             currentScore = 0;
         }
     }
@@ -86,8 +88,11 @@ public class Battlefield {
             Spaceship currentSpaceship = spaceships.get(i);
             currentSpaceship.update();
 
-            if (currentSpaceship.getBoundingBox()
-                    .overlaps(new Rectangle(aimPosition.x, aimPosition.y, 0, 0)))
+            if (new Rectangle(currentSpaceship.getPosition().x,
+                                currentSpaceship.getPosition().y,
+                                currentSpaceship.getBoundingBox().getWidth() / 2,
+                                currentSpaceship.getBoundingBox().getHeight())
+                    .overlaps(new Rectangle(aimPosition.x + 32, aimPosition.y, 32, 32)))
             {
                 playersWeapon.Fire();
                 currentSpaceship.takeDamage(playersWeapon.damage);
@@ -101,6 +106,7 @@ public class Battlefield {
         }
 
         addNewSpaceship();
+        aimPosition = new Vector2(-1000, -1000);
     }
 
     public void setAimPosition(Vector2 position) {
@@ -147,12 +153,25 @@ public class Battlefield {
     private Spaceship getRandomSpaceship() {
         Vector2 position = new Vector2(0, MathUtils.random(100, 640-100));
         Vector2 direction = new Vector2(1, 0);
-        return new Spaceship(position, direction, 1.0f, 300, 2.0f, 2.0f);
+        return new Spaceship(position, direction, 1.0f, 300, standartSpaceshipBoundingBox.getWidth(),
+                standartSpaceshipBoundingBox.getHeight());
     }
 
     private void checkRoundTime() {
         if (timeManager.getCurrentRoundTime() > roundTime) {
             stop();
         }
+    }
+
+    public Rectangle getStandartSpaceshipBoundingBox() {
+        return standartSpaceshipBoundingBox;
+    }
+
+    public void setStandartSpaceshipBoundingBox(Rectangle standartSpaceshipBoundingBox) {
+        this.standartSpaceshipBoundingBox = standartSpaceshipBoundingBox;
+    }
+
+    public int getCurrentScore() {
+        return currentScore;
     }
 }
