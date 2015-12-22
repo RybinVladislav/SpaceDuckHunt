@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Δενθρ on 21.12.2015.
  */
 public class Leaderboard {
-    private final Path pathToFile = Paths.get("src/leaderboard.txt");
+    private final Path pathToFile = Paths.get("core/assets/leaderboard.txt");
     static private Leaderboard instance;
 
     private Leaderboard() {
