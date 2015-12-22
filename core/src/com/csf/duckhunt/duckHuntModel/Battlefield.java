@@ -12,7 +12,7 @@ public class Battlefield {
     public final long roundTime = 60000;
 
     static private Battlefield instance;
-    static public int initialSpaceshipsCount = 5;
+    static public int initialSpaceshipsCount = 1;
     static public int width = 1000;
     static public int height = 1000;
 
@@ -136,7 +136,9 @@ public class Battlefield {
     }
 
     private Spaceship getRandomSpaceship() {
-        return new Spaceship(new Vector2(), new Vector2(), 1.0f, 300, 2.0f, 2.0f);
+        Vector2 position = new Vector2(0, height / 2);
+        Vector2 direction = new Vector2(1, 0);
+        return new Spaceship(position, direction, 1.0f, 300, 2.0f, 2.0f);
     }
 
     private void checkRoundTime() {
