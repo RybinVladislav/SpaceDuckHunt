@@ -24,6 +24,7 @@ public class Spaceship {
         this.destructionScore = destructionScore;
         this.moveSpeed = startingMoveSpeed;
 
+        this.boundingBox = new Rectangle();
         this.boundingBox.setWidth(width);
         this.boundingBox.setHeight(height);
     }
