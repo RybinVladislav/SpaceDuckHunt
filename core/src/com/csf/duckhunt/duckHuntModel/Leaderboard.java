@@ -33,7 +33,7 @@ public class Leaderboard {
         List<String> records = new ArrayList<>();
 
         try {
-            Files.readAllLines(pathToFile);
+            records = Files.readAllLines(pathToFile);
         }
         catch (IOException e) {
             System.err.println("Cannot open file: " + pathToFile);
