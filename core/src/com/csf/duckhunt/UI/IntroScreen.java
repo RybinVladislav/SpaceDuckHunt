@@ -60,7 +60,7 @@ public class IntroScreen implements Screen {
         titleSprite.draw(batch);
         batch.end();
         if (Gdx.input.isTouched()) {
-           game.setScreen(new MenuScreen());
+           game.setScreen(new MenuScreen(game));
         }
     }
 
