@@ -1,11 +1,12 @@
 package com.csf.duckhunt.duckHuntModel;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * Created by Денис on 20.12.2015.
+ * Created by пїЅпїЅпїЅпїЅпїЅ on 20.12.2015.
  */
 public class Battlefield {
     public final long spaceshipsCreationDuration = 4000;
@@ -16,7 +17,7 @@ public class Battlefield {
     static public int width = 1000;
     static public int height = 1000;
 
-    private Array<Spaceship> spaceships;
+    public Array<Spaceship> spaceships;
     private Array<Spaceship> destroyedSpaceships;
     private PlayersWeapon playersWeapon;
     private Vector2 aimPosition;
@@ -29,7 +30,7 @@ public class Battlefield {
 
     }
 
-    static public Battlefield getInstance() {
+    public static Battlefield getInstance() {
         if (instance == null) {
             instance = new Battlefield();
         }
@@ -136,7 +137,7 @@ public class Battlefield {
     }
 
     private Spaceship getRandomSpaceship() {
-        Vector2 position = new Vector2(0, height / 2);
+        Vector2 position = new Vector2(0, MathUtils.random(100, 640-100));
         Vector2 direction = new Vector2(1, 0);
         return new Spaceship(position, direction, 1.0f, 300, 2.0f, 2.0f);
     }

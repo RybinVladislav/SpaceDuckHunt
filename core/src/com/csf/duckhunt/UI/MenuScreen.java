@@ -83,7 +83,6 @@ public class MenuScreen implements Screen {
         startGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                startGameButton.setText("Starting new game");
                 game.setScreen(new MainScreen(game));
             }
         });
@@ -91,12 +90,11 @@ public class MenuScreen implements Screen {
         leadersButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                leadersButton.setText("Swithing to leaders");
                 game.setScreen(new LeadersScreen(game));
             }
         });
 
-        leadersButton.addListener(new ChangeListener() {
+        exitGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.exit();
@@ -142,5 +140,8 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
+        batch.dispose();
+        stage.dispose();
+        skin.dispose();
     }
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.csf.duckhunt.UI.IntroScreen;
-import com.csf.duckhunt.UI.MainScreen;
 import com.csf.duckhunt.UI.MenuScreen;
 
 public class GameClass extends Game {

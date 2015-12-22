@@ -1,14 +1,46 @@
 package com.csf.duckhunt.UI;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.csf.duckhunt.duckHuntModel.Battlefield;
+import com.csf.duckhunt.duckHuntModel.Spaceship;
 
 
 public class MainScreen implements Screen {
 
+    final Game game;
+    private SpriteBatch batch;
+    private Texture background;
+    private Sprite backSprite;
+    private OrthographicCamera camera;
+    private Texture ship;
+    private Sprite shipSprite;
+
+    private Battlefield battlefield = Battlefield.getInstance();
 
     public MainScreen(Game game) {
+        this.game = game;
+        create();
+    }
 
+    public void create() {
+        this.camera = new OrthographicCamera();
+        this.camera.setToOrtho(false, 853, 640);
+        this.batch = new SpriteBatch();
+        this.background = new Texture(Gdx.files.internal("core/assets/background.png"));
+        this.backSprite = new Sprite(background);
+        this.ship = new Texture(Gdx.files.internal("core/assets/ship.png"));
+        this.shipSprite = new Sprite(ship);
+        Pixmap pm = new Pixmap(Gdx.files.internal("core/assets/crosshair.png"));
+        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+        battlefield.start();
     }
 
     @Override
@@ -18,7 +50,19 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // This cryptic line clears the screen.
+        batch.begin();
 
+        backSprite.draw(batch);
+
+        for (Spaceship spaceship: battlefield.spaceships) {
+            shipSprite.setCenterX(spaceship.getBoundingBox().x);
+            shipSprite.setCenterY(spaceship.getBoundingBox().y);
+            shipSprite.draw(batch);
+        }
+
+        batch.end();
     }
 
     @Override

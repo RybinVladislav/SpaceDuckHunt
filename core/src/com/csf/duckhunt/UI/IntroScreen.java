@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.*;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.csf.duckhunt.GameClass;
 
 public class IntroScreen implements Screen {
 

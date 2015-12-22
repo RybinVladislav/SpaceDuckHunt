@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Created by Денис on 20.12.2015.
+ * Created by пїЅпїЅпїЅпїЅпїЅ on 20.12.2015.
  */
 public class Spaceship {
     public final int maxHealth = 3;
@@ -19,13 +19,13 @@ public class Spaceship {
 
     public Spaceship(Vector2 startingPosition, Vector2 startingMoveDirection, float startingMoveSpeed,
                      int destructionScore, float width, float height) {
-        position = startingPosition;
-        moveDirection = startingMoveDirection;
+        this.position = startingPosition;
+        this.moveDirection = startingMoveDirection;
         this.destructionScore = destructionScore;
-        moveSpeed = startingMoveSpeed;
+        this.moveSpeed = startingMoveSpeed;
 
-        boundingBox.width = width;
-        boundingBox.height = height;
+        this.boundingBox.setWidth(width);
+        this.boundingBox.setHeight(height);
     }
 
     public void takeDamage(int amount) {
