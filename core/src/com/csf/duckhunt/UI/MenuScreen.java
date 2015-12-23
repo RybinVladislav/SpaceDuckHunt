@@ -80,6 +80,7 @@ public class MenuScreen implements Screen {
         startGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                game.getScreen().dispose();
                 game.setScreen(new MainScreen(game));
             }
         });
@@ -87,6 +88,7 @@ public class MenuScreen implements Screen {
         leadersButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                game.getScreen().dispose();
                 game.setScreen(new LeadersScreen(game));
             }
         });
