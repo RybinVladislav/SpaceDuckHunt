@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -21,6 +22,7 @@ public class MenuScreen implements Screen {
     Sprite backSprite;
     Skin skin;
     Stage stage;
+    private ParticleEffect effect;
 
     private Game game;
 
@@ -56,7 +58,6 @@ public class MenuScreen implements Screen {
     }
 
     public void create() {
-        batch = new SpriteBatch();
         this.batch = new SpriteBatch();
         this.background = new Texture(Gdx.files.internal("core/assets/background.png"));
         this.backSprite = new Sprite(background);

@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.Array;
  * Created by ����� on 20.12.2015.
  */
 public class Battlefield {
-    public final long spaceshipsCreationDuration = 1000;
-    public final long roundTime = 60000;
+    public final long spaceshipsCreationDuration = 60000;
+    public final long roundTime = 5000;
 
     static private Battlefield instance;
     static public int initialSpaceshipsCount = 1;
@@ -70,7 +70,6 @@ public class Battlefield {
         spaceships = null;
         playersWeapon = null;
         timeManager.reset();
-        Leaderboard.getInstance().addRecord(Player.getInstance(), currentScore);
     }
 
     public void update() {

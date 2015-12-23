@@ -30,7 +30,7 @@ public class LeadersScreen implements Screen {
 
     private final int recordsPerPage = 10;
     private final int topOffset = 30;
-    private final int leftOffset = 250;
+    private final int leftOffset = 150;
     private final int offsetBtwRecords = 40;
     private final int maxDisplayedName = 20;
     private final BitmapFont font = new BitmapFont();
@@ -103,7 +103,7 @@ public class LeadersScreen implements Screen {
         backSprite.draw(batch);
 
         StringBuffer sb = new StringBuffer("Name");
-        for (int j = 4; j < maxDisplayedName; j++) {
+        for (int j = 4; j <38; j++) {
             sb.append(" ");
         }
         sb.append("Score");

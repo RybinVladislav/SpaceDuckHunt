@@ -7,15 +7,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.csf.duckhunt.duckHuntModel.Battlefield;
-import com.csf.duckhunt.duckHuntModel.BattlefieldState;
-import com.csf.duckhunt.duckHuntModel.Spaceship;
-import com.csf.duckhunt.duckHuntModel.TimeManager;
+import com.csf.duckhunt.duckHuntModel.*;
+
+import java.util.Date;
 
 
 public class MainScreen implements Screen {
@@ -34,6 +34,7 @@ public class MainScreen implements Screen {
     private Texture ship;
     private Sprite shipSprite;
     private boolean isEndScreenShown = false;
+    private ParticleEffect effect;
 
     private Battlefield battlefield = Battlefield.getInstance();
 
@@ -44,6 +45,9 @@ public class MainScreen implements Screen {
     }
 
     public void create() {
+
+        this.effect = new ParticleEffect();
+        effect.load(Gdx.files.internal("core/assets/explosion.p"), Gdx.files.internal("core/assets/img"));
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, 853, 640);
         this.batch = new SpriteBatch();
@@ -87,14 +91,19 @@ public class MainScreen implements Screen {
                 Vector3 vec = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
                 camera.unproject(vec);
                 battlefield.setAimPosition(new Vector2(vec.x, vec.y));
+                effect.setPosition(vec.x, vec.y);
+                effect.start();
+                effect.draw(batch, delta);
             }
             battlefield.update();
         }
         else if(battlefield.getCurrentState() == BattlefieldState.stopped) {
             if (!isEndScreenShown) {
+                Player.getInstance().setName(new Date().toString().replaceAll("\\s",""));
+                Leaderboard.getInstance().addRecord(Player.getInstance(), battlefield.getCurrentScore());
                 isEndScreenShown = true;
                 game.getScreen().dispose();
-                game.setScreen(new NameInputScreen(game));
+                game.setScreen(new MenuScreen(game));
             }
         }
 
