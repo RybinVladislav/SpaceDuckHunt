@@ -67,10 +67,11 @@ public class Spaceship {
 
     private void move() {
         position = position.set(position.x  +moveDirection.x * moveSpeed, position.y + moveDirection.y * moveSpeed);
+
         yOffset = position.y - startPosition;
-        if (yOffset > 20) {
+        if (yOffset > 40) {
             moveDirection.y = -1;
-        } else if (yOffset < -20) {
+        } else if (yOffset < -40) {
             moveDirection.y = 1;
         }
     }

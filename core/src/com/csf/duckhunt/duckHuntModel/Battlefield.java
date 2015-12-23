@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
  * Created by ����� on 20.12.2015.
  */
 public class Battlefield {
-    public final long spaceshipsCreationDuration = 4000;
+    public final long spaceshipsCreationDuration = 1000;
     public final long roundTime = 60000;
 
     static private Battlefield instance;
@@ -151,9 +151,9 @@ public class Battlefield {
     }
 
     private Spaceship getRandomSpaceship() {
-        Vector2 position = new Vector2(0, MathUtils.random(100, 640-100));
-        Vector2 direction = new Vector2(1, 0);
-        return new Spaceship(position, direction, 1.0f, 300, standartSpaceshipBoundingBox.getWidth(),
+        Vector2 position = new Vector2(0, MathUtils.random(64, 640-64));
+        Vector2 direction = new Vector2(1, 1);
+        return new Spaceship(position, direction, MathUtils.random(1.0f, 4.0f), 300, standartSpaceshipBoundingBox.getWidth(),
                 standartSpaceshipBoundingBox.getHeight());
     }
 
