@@ -174,4 +174,8 @@ public class Battlefield {
     public int getCurrentScore() {
         return currentScore;
     }
+
+    public BattlefieldState getCurrentState() {
+        return currentState;
+    }
 }

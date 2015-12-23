@@ -9,4 +9,23 @@ user_2 56000
 user_3 4234
 user_1 4000
 user_2 56000
-user_3 4234unnamed 4200unnamed 0unnamed 11100
+user_3 4234
+unnamed 0
+unnamed 0
+unnamed 300
+unnamed 0
+unnamed 0
+unnamed 0
+unnamed 0
+unnamed 0
+unnamed 0
+unnamed 0
+unnamed 0
+unnamed 300
+unnamed 0
+unnamed 0
+unnamed 0
+unnamed 300
+unnamed 300
+unnamed 0
+unnamed 300

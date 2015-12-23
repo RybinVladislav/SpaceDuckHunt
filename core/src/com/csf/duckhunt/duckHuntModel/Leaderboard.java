@@ -21,7 +21,7 @@ public class Leaderboard {
 
     public void addRecord(Player player, int score) {
         try {
-            Files.write(pathToFile, (player.getName() + " " + score).getBytes(),
+            Files.write(pathToFile, ("\n" + player.getName() + " " + score).getBytes(),
                     StandardOpenOption.APPEND);
         }
         catch (IOException e) {
@@ -34,6 +34,11 @@ public class Leaderboard {
 
         try {
             records = Files.readAllLines(pathToFile);
+            records.sort((o1, o2)->{
+                int sc1 = Integer.parseInt(o1.split(" ")[1]);
+                int sc2 = Integer.parseInt(o2.split(" ")[1]);
+                return sc2 - sc1;
+            });
         }
         catch (IOException e) {
             System.err.println("Cannot open file: " + pathToFile);
