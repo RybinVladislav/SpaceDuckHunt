@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Денис on 21.12.2015.
+ * Created by пїЅпїЅпїЅпїЅпїЅ on 21.12.2015.
  */
 public class Leaderboard {
     private final Path pathToFile = Paths.get("core/assets/leaderboard.txt");
@@ -34,7 +34,7 @@ public class Leaderboard {
 
         try {
             records = Files.readAllLines(pathToFile);
-            records.sort((o1, o2)->{
+            records.sort((o1, o2) -> {
                 int sc1 = Integer.parseInt(o1.split(" ")[1]);
                 int sc2 = Integer.parseInt(o2.split(" ")[1]);
                 return sc2 - sc1;
