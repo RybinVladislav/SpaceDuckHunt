@@ -3,6 +3,7 @@ package com.csf.duckhunt;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.csf.duckhunt.UI.IntroScreen;
@@ -23,6 +24,8 @@ public class GameClass extends Game {
 		menu = new MenuScreen();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
+		Pixmap pm = new Pixmap(Gdx.files.internal("core/assets/crosshair.png"));
+		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
 		this.setScreen(new IntroScreen(this));
 	}
 

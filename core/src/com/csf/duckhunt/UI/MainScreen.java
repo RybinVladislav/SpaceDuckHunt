@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -14,6 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.csf.duckhunt.duckHuntModel.Battlefield;
+import com.csf.duckhunt.duckHuntModel.BattlefieldState;
 import com.csf.duckhunt.duckHuntModel.Spaceship;
 import com.csf.duckhunt.duckHuntModel.TimeManager;
 
@@ -33,6 +33,7 @@ public class MainScreen implements Screen {
     private OrthographicCamera camera;
     private Texture ship;
     private Sprite shipSprite;
+    private boolean isEndScreenShown = false;
 
     private Battlefield battlefield = Battlefield.getInstance();
 
@@ -50,8 +51,6 @@ public class MainScreen implements Screen {
         this.backSprite = new Sprite(background);
         this.ship = new Texture(Gdx.files.internal("core/assets/ship.png"));
         this.shipSprite = new Sprite(ship);
-        Pixmap pm = new Pixmap(Gdx.files.internal("core/assets/crosshair.png"));
-        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         battlefield.setStandartSpaceshipBoundingBox(new Rectangle(0, 0,
                 this.ship.getWidth(), this.ship.getHeight()));
         Battlefield.width = Gdx.graphics.getWidth();
@@ -72,25 +71,34 @@ public class MainScreen implements Screen {
 
         backSprite.draw(batch);
 
-        for (Spaceship spaceship: battlefield.spaceships) {
-            shipSprite.setCenterX(spaceship.getPosition().x);
-            shipSprite.setCenterY(spaceship.getPosition().y);
-            shipSprite.draw(batch);
-        }
+        if (battlefield.getCurrentState() == BattlefieldState.active) {
+            for (Spaceship spaceship : battlefield.spaceships) {
+                shipSprite.setCenterX(spaceship.getPosition().x);
+                shipSprite.setCenterY(spaceship.getPosition().y);
+                shipSprite.draw(batch);
+            }
 
-        font.draw(batch, "Score " + battlefield.getCurrentScore(), leftScoreOffset, topScoreOffset);
-        long timeMin = (battlefield.roundTime - TimeManager.getInstance().getCurrentRoundTime()) / 1000 / 60;
-        long timeSec = (battlefield.roundTime - TimeManager.getInstance().getCurrentRoundTime()) / 1000 % 60;
-        font.draw(batch, timeMin + ":" + (timeSec > 9 ? timeSec : "0" + timeSec), leftTimePosition, topTimePosition);
+            font.draw(batch, "Score " + battlefield.getCurrentScore(), leftScoreOffset, topScoreOffset);
+            long timeMin = (battlefield.roundTime - TimeManager.getInstance().getCurrentRoundTime()) / 1000 / 60;
+            long timeSec = (battlefield.roundTime - TimeManager.getInstance().getCurrentRoundTime()) / 1000 % 60;
+            font.draw(batch, timeMin + ":" + (timeSec > 9 ? timeSec : "0" + timeSec), leftTimePosition, topTimePosition);
+
+            if (Gdx.input.isTouched()) {
+                Vector3 vec = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+                camera.unproject(vec);
+                battlefield.setAimPosition(new Vector2(vec.x, vec.y));
+            }
+            battlefield.update();
+        }
+        else if(battlefield.getCurrentState() == BattlefieldState.stopped) {
+            if (!isEndScreenShown) {
+                isEndScreenShown = true;
+                game.getScreen().dispose();
+                game.setScreen(new NameInputScreen(game));
+            }
+        }
 
         batch.end();
-
-        if (Gdx.input.isTouched()) {
-            Vector3 vec = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(vec);
-            battlefield.setAimPosition(new Vector2(vec.x, vec.y));
-        }
-        battlefield.update();
     }
 
     @Override
@@ -115,6 +123,9 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        background.dispose();
+        ship.dispose();
+        font.dispose();
+        batch.dispose();
     }
 }

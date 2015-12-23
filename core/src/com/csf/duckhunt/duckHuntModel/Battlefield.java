@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Battlefield {
     public final long spaceshipsCreationDuration = 4000;
-    public final long roundTime = 60000;
+    public final long roundTime = 6000;
 
     static private Battlefield instance;
     static public int initialSpaceshipsCount = 1;
@@ -173,5 +173,9 @@ public class Battlefield {
 
     public int getCurrentScore() {
         return currentScore;
+    }
+
+    public BattlefieldState getCurrentState() {
+        return currentState;
     }
 }
