@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.csf.duckhunt.duckHuntModel.Battlefield;
 import com.csf.duckhunt.duckHuntModel.Spaceship;
+import com.csf.duckhunt.duckHuntModel.TimeManager;
 
 
 public class MainScreen implements Screen {
@@ -22,6 +23,8 @@ public class MainScreen implements Screen {
     private final Game game;
     private final int leftScoreOffset = 40;
     private final int topScoreOffset = 40;
+    private final int leftTimePosition = Gdx.graphics.getWidth() / 2 - 30;
+    private final int topTimePosition = Gdx.graphics.getHeight() - 30;
     private final BitmapFont font = new BitmapFont();
 
     private SpriteBatch batch;
@@ -76,6 +79,9 @@ public class MainScreen implements Screen {
         }
 
         font.draw(batch, "Score " + battlefield.getCurrentScore(), leftScoreOffset, topScoreOffset);
+        long timeMin = (battlefield.roundTime - TimeManager.getInstance().getCurrentRoundTime()) / 1000 / 60;
+        long timeSec = (battlefield.roundTime - TimeManager.getInstance().getCurrentRoundTime()) / 1000 % 60;
+        font.draw(batch, timeMin + ":" + (timeSec > 9 ? timeSec : "0" + timeSec), leftTimePosition, topTimePosition);
 
         batch.end();
 
